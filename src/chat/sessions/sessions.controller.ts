@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseUUIDPipe,
   Patch,
   Post,
   Query,
@@ -78,7 +79,7 @@ export class SessionsController {
     // @ts-ignore
     @Req() request: IRequest,
     @Body() body: UpdateSessionDto,
-    @Param('id') id: string,
+    @Param('id', new ParseUUIDPipe({ optional: false })) id: string,
   ) {
     const session = await this.sessionsService.patch(id, body, request.user);
     const resp = plainToInstance(SessionResponseDto, session, {
@@ -93,7 +94,7 @@ export class SessionsController {
   @ApiParam({
     name: 'id',
     type: 'string',
-    required: true,
+    required: false,
     description: 'The ID of the chat to mark/unmark as favorite',
   })
   @ApiOkResponse({
@@ -103,7 +104,7 @@ export class SessionsController {
   async toggleFavorite(
     // @ts-ignore
     @Req() request: IRequest,
-    @Param('id') id: string,
+    @Param('id', new ParseUUIDPipe({ optional: false })) id: string,
   ) {
     const session = await this.sessionsService.toggleFavorite(id, request.user);
     const resp = plainToInstance(SessionResponseDto, session, {
@@ -127,7 +128,7 @@ export class SessionsController {
   async deleteSession(
     // @ts-ignore
     @Req() request: IRequest,
-    @Param('id') id: string,
+    @Param('id', new ParseUUIDPipe({ optional: false })) id: string,
   ) {
     await this.sessionsService.delete(id, request.user);
     return successHandler(null, 'Session deleted successfully');
@@ -186,7 +187,7 @@ export class SessionsController {
   async getSessionById(
     // @ts-ignore
     @Req() request: IRequest,
-    @Param('id') id: string,
+    @Param('id', new ParseUUIDPipe({ optional: false })) id: string,
   ) {
     const session = await this.sessionsService.findById(id, request.user);
     const resp = plainToInstance(SessionResponseDto, session, {

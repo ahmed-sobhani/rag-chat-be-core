@@ -3,8 +3,10 @@ import {
   Controller,
   Get,
   Param,
+  ParseUUIDPipe,
   Post,
-  Query, Req,
+  Query,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 import { MessagesService } from './messages.service';
@@ -54,7 +56,7 @@ export class MessagesController {
   })
   async sendMessage(
     @Req() request: any,
-    @Param('id') sessionId: string,
+    @Param('id', new ParseUUIDPipe({ optional: false })) sessionId: string,
     @Body() createMessageDto: CreateMessageDto,
   ) {
     const msg = await this.messageService.create(
@@ -95,7 +97,7 @@ export class MessagesController {
   @ApiQuery({ name: 'fromDate', required: false, type: Date })
   @ApiQuery({ name: 'toDate', required: false, type: Date })
   async findAllMessage(
-    @Param('id') sessionId: string,
+    @Param('id', new ParseUUIDPipe({ optional: false })) sessionId: string,
     @Query() options: GetAllMessagesDto,
   ) {
     const msgs = await this.messageService.findAll(sessionId, options);

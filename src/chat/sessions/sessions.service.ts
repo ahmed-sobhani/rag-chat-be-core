@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ForbiddenException,
   Injectable,
   NotFoundException,
@@ -12,6 +13,7 @@ import {
   sortDeconstruct,
 } from '../../shared/helpers/paginator';
 import { rangeDateFilter } from '../../shared/helpers/dates';
+import { isUUID } from 'class-validator';
 
 @Injectable()
 export class SessionsService {
@@ -64,6 +66,9 @@ export class SessionsService {
     user: string | null = null,
     throwError = true,
   ): Promise<SessionEntity> {
+    if (!id || !isUUID(id)) {
+      throw new BadRequestException('Invalid UUID');
+    }
     const session = await this.sessionRepository.findOne({ where: { id } });
     if (!session) {
       if (throwError) throw new NotFoundException('No such chat');
