@@ -40,7 +40,6 @@ import { LoggerModule } from 'nestjs-pino';
             limit: environment.rate_limiting.limit,
           },
         ],
-        ignoreUserAgents: [/x-if-platform-next-build/],
         errorMessage: 'Too many requests. Give it a moment and attempt again.',
       }),
     }),

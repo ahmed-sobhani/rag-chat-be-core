@@ -8,9 +8,8 @@ export class CustomThrottlerGuard extends ThrottlerGuard {
     const ip = req.ip || req.connection?.remoteAddress || 'unknown';
     const userAgent = req.headers['user-agent'] || 'unknown';
     const deviceId = req.headers['x-device-id'] || 'unknown';
-    const platform = req.headers['if-platform'] || 'unknown';
     const key = createHash('sha256')
-      .update(`${ip}_${userAgent}_${deviceId}_${platform}`)
+      .update(`${ip}_${userAgent}_${deviceId}`)
       .digest('hex');
     // @ts-ignore
     return key;
