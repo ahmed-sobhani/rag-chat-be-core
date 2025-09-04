@@ -94,6 +94,20 @@ RATE_LIMIT_LIMIT=100
 # CORS
 CORS_ENABLED=true
 CORS_ORIGIN=http://localhost:4200,http://localhost:3000
+
+# LOGGING
+LOG_LEVEL=debug
+LOG_DIR=./logs
+SERVICE_NAME=rag-chat-service
+
+# Console colorized single-line (set to false to keep raw JSON):
+PRETTY_LOGS=true
+
+# Optional Loki:
+LOKI_URL=http://localhost:3100
+LOKI_BATCH_INTERVAL=5000
+# LOKI_BASIC_AUTH=user:pass
+LOKI_LABELS={"job":"rag-chat-service","env":"development","service":"rag-chat-service"}
 ```
 
 ### 3. Run with Docker
