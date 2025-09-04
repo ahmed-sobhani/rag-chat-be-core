@@ -142,3 +142,51 @@ Services:
 * **api** → NestJS app
 * **db** → PostgreSQL
 * **pgadmin** → optional DB admin UI
+
+## 🧪 Tests
+
+**Stack:** Jest + ts-jest (unit tests only; no DB).
+
+**Run:**
+
+```bash
+npm test
+npm run test:watch
+npm run test:cov  # text + HTML at coverage/lcov-report/index.html
+```
+
+**Coverage (focus on services):**
+
+```ts
+// jest.config.ts (key bits)
+collectCoverageFrom: [
+  'src/chat/**/*.ts',
+  '!src/**/*.spec.ts',
+  '!src/**/index.ts',
+  '!src/**/*.module.ts',
+  '!src/**/*.controller.ts',
+  '!src/**/*.dto.ts',
+  '!src/main.ts',
+  '!src/shared/**',
+];
+coverageReporters: ['text', 'text-summary', 'lcov'];
+coverageThreshold: { global: { statements: 80, branches: 70, functions: 80, lines: 80 } };
+```
+
+**Files:**
+
+* `src/chat/sessions/sessions.service.spec.ts`
+* `src/chat/messages/messages.service.spec.ts`
+* `test/factories.ts` (makeSession/makeMessage)
+* `test/test-utils.ts` (repo mocks, uuid mock, reset helpers)
+
+**Mocking:**
+
+* Mock TypeORM `Repository`
+* Mock helpers: `paginateAndSort`, `sortDeconstruct`, `rangeDateFilter`
+* Mock `uuid.v7`
+* In messages tests, mock `SessionsService.findById`
+
+**CI (GitHub Actions):**
+
+* Run tests on Node 22, cache deps, upload `coverage/` artifact.
