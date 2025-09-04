@@ -143,6 +143,8 @@ Services:
 * **db** → PostgreSQL
 * **pgadmin** → optional DB admin UI
 
+---
+
 ## 🧪 Tests
 
 **Stack:** Jest + ts-jest (unit tests only; no DB).
