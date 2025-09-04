@@ -13,6 +13,9 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
     "test:e2e": "cross-env NODE_ENV=test && rimraf dist/ && jest --config ./test/jest-e2e.json --runInBand --detectOpenHandles --forceExit"
   },
   "dependencies": {
@@ -82,9 +85,26 @@
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "collectCoverageFrom": [
-      "**/*.(t|j)s"
+      "**/chat/**/*.(t|j)s",
+      "!**/*.controller.ts",
+      "!**/database/**",
+      "!**/shared/**",
+      "!**/main.ts",
+      "!**/index.ts",
+      "!**/*.module.ts",
+      "!**/*.interface.ts",
+      "!**/*.dto.ts",
+      "!**/*.entity.ts"
     ],
     "coverageDirectory": "../coverage",
+    "coverageThreshold": {
+      "global": {
+        "statements": 95,
+        "branches": 90,
+        "functions": 95,
+        "lines": 95
+      }
+    },
     "testEnvironment": "node"
   }
 }

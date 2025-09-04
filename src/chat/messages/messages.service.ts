@@ -1,17 +1,9 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { MessageEntity } from '../../database/chat/mesage.entity';
-import {
-  Between,
-  ILike,
-  LessThanOrEqual,
-  MoreThan,
-  MoreThanOrEqual,
-  Repository,
-} from 'typeorm';
+import { ILike, MoreThan, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateMessageDto, GetAllMessagesDto } from '../DTOs';
 import { SessionsService } from '../sessions/sessions.service';
-import { GetAllDto } from '../../shared/DTOs';
 import {
   paginateAndSort,
   sortDeconstruct,
