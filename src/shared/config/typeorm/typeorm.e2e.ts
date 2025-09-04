@@ -12,9 +12,9 @@ export const config = {
   entities: ['dist/**/*.entity{.ts,.js}', '**/*.entity{.ts,.js}'],
   migrations: ['dist/migrations/*{.ts,.js}', 'migrations/*{.ts,.js}'],
   autoLoadEntities: true,
-  synchronize: process?.env.NODE_ENV !== 'production',
+  synchronize: true,
   ssl:
-    process?.env.DATABASE_SSL === 'true'
+    process?.env.TETS_DATABASE_SSL === 'true'
       ? { rejectUnauthorized: false }
       : false,
 };

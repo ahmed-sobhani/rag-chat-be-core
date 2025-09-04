@@ -108,6 +108,14 @@ LOKI_URL=http://localhost:3100
 LOKI_BATCH_INTERVAL=5000
 # LOKI_BASIC_AUTH=user:pass
 LOKI_LABELS={"job":"rag-chat-service","env":"development","service":"rag-chat-service"}
+
+# E2E Test Config
+TEST_DATABASE_HOST=localhost
+TEST_DATABASE_PORT=5432
+TEST_DATABASE_USERNAME=postgres
+TEST_DATABASE_PASSWORD=postgres
+TEST_DATABASE_NAME=rag_chat_app_test
+TETS_DATABASE_SSL=false
 ```
 
 ### 3. Run with Docker
