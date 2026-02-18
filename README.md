@@ -200,3 +200,5 @@ coverageThreshold: { global: { statements: 80, branches: 70, functions: 80, line
 **CI (GitHub Actions):**
 
 * Run tests on Node 22, cache deps, upload `coverage/` artifact.
+* Run and Enjoy
+* Thanks for contributing
